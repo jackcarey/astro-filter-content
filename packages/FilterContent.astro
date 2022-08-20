@@ -1,0 +1,7 @@
+---
+const { options } = Astro.props;
+const sanitised_options = options.split(",").map(x => x.trim().replaceAll(new RegExp("[^A-z0-9]","gmi"),"-")).sort().join(",").toLowerCase();
+---
+<span data-adf-section={sanitised_options}>
+    <slot />
+</span>

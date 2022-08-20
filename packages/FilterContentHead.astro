@@ -1,0 +1,145 @@
+---
+const {FILTER_OPTIONS} = Astro.props;
+const ITEMS = FILTER_OPTIONS.items;
+const filter_styles = (() => {
+    //keep only the alphanumeric representation of each item
+    let items = ITEMS.map((x) =>
+        x.trim().replaceAll(new RegExp("[^A-z0-9]", "gmi"), "-")
+    ).sort();
+    items.sort();
+    let displayStyle = `{display:initial;}`;
+    let hideStyle = `{display:none;}`;
+    let str = `*[data-adf-section]${hideStyle}`;
+    for (let item of items) {
+        let parentSelector = `[data-adf*="${item}"]`;
+        let childDisplaySelector = `[data-adf-section*="${item}"]`;
+        let displayByDefault = `*${parentSelector} *${childDisplaySelector}${displayStyle}`;
+        str += `${displayByDefault}\n\n`;
+    }
+    return `${str}`;
+})();
+const item_array_str = ITEMS.map((x) => {
+    return `"${x}"`;
+}).join(",");
+---
+
+<>
+    <!-- Content Filter set up -->
+    <style set:html={filter_styles} type="text/css">
+
+    </style>
+    <script
+        set:html={`const ADF_NAME="${
+            FILTER_OPTIONS.label || FILTER_OPTIONS.prefix || ""
+        }" ;\nconst ADF_OPTIONS = [${item_array_str}];\nconst ADF_MULTIPLE = ${
+            FILTER_OPTIONS.multiple ? true : false
+        };`}
+    ></script>
+    <script is:inline defer>
+        function forceHashVisibility(url) {
+            if (!url) {
+                url = window.location;
+            }
+            let heading = document.querySelector(new URL(url).hash);
+            if (heading) {
+                let parent = heading.parentElement;
+                let adfSection = null;
+                while (parent != document.body) {
+                    if (parent?.dataset.adfSection) {
+                        adfSection = parent.dataset.adfSection;
+                        break;
+                    } else {
+                        parent = parent.parentElement;
+                    }
+                }
+                if (adfSection) {
+                    if (!document.body.dataset.adf) {
+                        document.body.dataset.adf = adfSection;
+                    } else {
+                        document.body.dataset.adf += "," + adfSection;
+                    }
+                    console.log(document.body.dataset.adf);
+                }
+            }
+        }
+        window.onload = () => {
+            let val = localStorage.getItem("content-filter");
+            //if any stored options are invalid, clear the cookie so at least some content is restored
+            if (val) {
+                for (let opt of val.split(",")) {
+                    if (ADF_OPTIONS.indexOf(opt) == -1) {
+                        val = null;
+                        localStorage.removeItem("content-filter");
+                        break;
+                    }
+                }
+            }
+
+            // if multiple selection is not enabled, set the val to only the first option
+            if (val && val.split(",").length >= 2 && !ADF_MULTIPLE) {
+                val = val.split(",")[0];
+            }
+
+            // set the parent class attributes on the body so that all children in the theme are styled correctly
+            if (val) {
+                document.body.setAttribute("data-adf", val);
+            } else {
+                document.body.removeAttribute("data-adf");
+            }
+
+            // set any and all <select/> values
+            for (let element of document.querySelectorAll(
+                "select.content-filter-select"
+            )) {
+                let opts = element.options;
+                for (let idx in opts) {
+                    let opt = opts[idx];
+                    if (opt.value == val) {
+                        element.selectedIndex = idx;
+                        break;
+                    }
+                }
+            }
+
+            //if multiple selections are allowed, set the content of all <summary/> text and update the checkboxes
+            let multi_name = ADF_NAME;
+            let count = 0;
+            document
+                .querySelectorAll(
+                    `details.content-filter-select input[type="checkbox"]`
+                )
+                .forEach((box) => {
+                    let checked = val && val.indexOf(box.value) >= 0;
+                    box.checked = checked;
+                    count += 1;
+                    if (checked) {
+                        multi_name += box.value;
+                    }
+                });
+            let selected_count = multi_name.split(",").length;
+            document
+                .querySelectorAll(".content-filter-multi-name")
+                .forEach((x) => {
+                    let display = val ? ADF_NAME + val : ADF_NAME;
+                    x.innerText =
+                        selected_count == 0
+                            ? "None"
+                            : selected_count == count
+                            ? "All " + ADF_NAME
+                            : display;
+                });
+            forceHashVisibility();
+        };
+        /**
+         * If a user navigates to a heading via hash links then they must always be visible.
+         * This is done by traversing up the DOM to find the ADF section, then adding those options to the main ADF filter.
+         */
+        window.addEventListener(
+            "hashchange",
+            (evt) => {
+                forceHashVisibility(evt.newURL);
+            },
+            false
+        );
+    </script>
+</>
