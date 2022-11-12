@@ -52,12 +52,12 @@ This adds the necessary styles and scripts for filtering the DOM.
 
 Add the snippet below where you would like your filter controls to appear. A useful location might be in a sidebar or next to a dark mode button.
 
-Frontmatter:
+In frontmatter:
 ```
 import FilterContentControl from "@jackcarey/astro-filter-content/>"
 ```
 
-Document/layout content:
+In HTML document/layout content:
 ```
 <FilterContentControl/>
 ```
