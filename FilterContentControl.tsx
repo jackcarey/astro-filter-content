@@ -1,5 +1,4 @@
 import type { FunctionalComponent } from "preact";
-import "./ContentFilterSelect.css";
 import * as CONFIG from "../../config";
 
 let NAME = CONFIG.FILTER_OPTIONS.label || CONFIG.FILTER_OPTIONS.prefix || "";
