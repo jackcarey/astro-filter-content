@@ -1,20 +1,20 @@
 {
   "name": "@jackcarey/astro-filter-content",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Astro components to enable DOM filtering of content within a page.",
-  "main": "index.js",
+  "main": "./index.js",
   "type": "module",
   "exports": {
-    ".": "./index.js",
-    "./FilterContent": "./FilterContent.astro",
-    "./FilterContentHead": "./FilterContentHead.astro",
-    "./FilterContentControl": "./FilterContentControl.tsx",
+    ".": "./packages/index.js",
+    "./FilterContent": "./packages/FilterContent.astro",
+    "./FilterContentHead": "./packages/FilterContentHead.astro",
+    "./FilterContentControl": "./packages/FilterContentControl.tsx"
   },
   "files": [
-    "index.js",
-    "FilterContentHead.astro",
-    "FilterContentControl.tsx",
-    "FilterContent.astro"
+    "./packages/index.js",
+    "./packages/FilterContentHead.astro",
+    "./packages/FilterContentControl.tsx",
+    "./packages/FilterContent.astro"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -30,7 +30,7 @@
     "html",
     "DOM"
   ],
-  "author": "Jack Carey (jackcarey.co.uk)",
+  "author": "Jack Carey (https://jackcarey.co.uk)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/jackcarey/astro-filter-content/issues"
