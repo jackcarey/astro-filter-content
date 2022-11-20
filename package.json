@@ -1,45 +1,46 @@
 {
-  "name": "@jackcarey/astro-filter-content",
-  "version": "0.0.5",
-  "description": "Astro components to enable DOM filtering of content within a page.",
-  "main": "index.js",
-  "type": "module",
-  "exports": {
-    "FilterContent": "./FilterContent.astro",
-    "FilterContentHead": "./FilterContentHead.astro",
-    "FilterContentControl": "./FilterContentControl.tsx"
-  },
-  "files": [
-    "./packages/index.js",
-    "./packages/FilterContentHead.astro",
-    "./packages/FilterContentControl.tsx",
-    "./packages/FilterContent.astro"
-  ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jackcarey/astro-filter-content.git"
-  },
-  "keywords": [
-    "astro-component",
-    "astro",
-    "filter",
-    "html",
-    "DOM"
-  ],
-  "author": "Jack Carey (https://jackcarey.co.uk)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jackcarey/astro-filter-content/issues"
-  },
-  "homepage": "https://github.com/jackcarey/astro-filter-content#readme",
-  "devDependencies": {
-    "typescript": "^4.7.4",
-      "astro": "^1.0.6"
-  },
-  "dependencies": {
-    "astro": "^1.0.6"
-  }
+    "name": "@jackcarey/astro-filter-content",
+    "version": "0.0.5",
+    "description": "Astro components to enable DOM filtering of content within a page.",
+    "main": "./index.js",
+    "type": "module",
+    "exports": {
+        ".": "./index.js",
+        "FilterContent": "./FilterContent.astro",
+        "FilterContentHead": "./FilterContentHead.astro",
+        "FilterContentControl": "./FilterContentControl.tsx"
+    },
+    "files": [
+        "./packages/index.js",
+        "./packages/FilterContentHead.astro",
+        "./packages/FilterContentControl.tsx",
+        "./packages/FilterContent.astro"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jackcarey/astro-filter-content.git"
+    },
+    "keywords": [
+        "astro-component",
+        "astro",
+        "filter",
+        "html",
+        "DOM"
+    ],
+    "author": "Jack Carey (https://jackcarey.co.uk)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jackcarey/astro-filter-content/issues"
+    },
+    "homepage": "https://github.com/jackcarey/astro-filter-content#readme",
+    "devDependencies": {
+        "typescript": "^4.7.4",
+        "astro": "^1.0.6"
+    },
+    "dependencies": {
+        "astro": "^1.0.6"
+    }
 }
