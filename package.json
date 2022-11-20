@@ -1,13 +1,14 @@
 {
   "name": "@jackcarey/astro-filter-content",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Astro components to enable DOM filtering of content within a page.",
   "main": "index.js",
   "type": "module",
   "exports": {
     ".": "./index.js",
-    "./Button": "./Button.astro",
-    "./Heading": "./Heading.astro"
+    "./FilterContent": "./FilterContent.astro",
+    "./FilterContentHead": "./FilterContentHead.astro",
+    "./FilterContentControl": "./FilterContentControl.tsx",
   },
   "files": [
     "index.js",
