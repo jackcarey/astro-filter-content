@@ -38,9 +38,9 @@
     "homepage": "https://github.com/jackcarey/astro-filter-content#readme",
     "devDependencies": {
         "typescript": "^4.7.4",
-        "astro": "^1.0.6"
+        "astro": "^5.18.1"
     },
     "dependencies": {
-        "astro": "^1.0.6"
+        "astro": "^5.18.1"
     }
 }
